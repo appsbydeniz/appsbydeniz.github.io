@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Imprint – Apps by Deniz</title>
+<meta name="description" content="Imprint (Impressum) of Apps by Deniz.">
+<link rel="icon" type="image/png" href="assets/icons/pathpop.png">
+<style>
+@font-face { font-family: "Nunito"; src: url("pathpop/fonts/Nunito-Variable.ttf") format("truetype"); font-weight: 200 1000; font-display: swap; }
+:root {
+  --bg: #F4F6FB; --fg: #151A2E; --muted: #5A6178; --line: #DFE3EE; --surface: #FFFFFF; --accent: #2350E8;
+  --font: "Nunito", ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #10131F; --fg: #EEF1FA; --muted: #A3AAC2; --line: #262C42; --surface: #181C2C; --accent: #7EA0FF; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #10131F; --fg: #EEF1FA; --muted: #A3AAC2; --line: #262C42; --surface: #181C2C; --accent: #7EA0FF; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-weight: 600; font-size: 17px; line-height: 1.6; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 1000; font-size: 20px; letter-spacing: -.2px; }
+.dots { display: inline-grid; grid-template-columns: repeat(3, 9px); gap: 3px; }
+.dots i { width: 9px; height: 9px; border-radius: 3px; }
+.dots i:nth-child(1) { background: #1C7FD6; }
+.dots i:nth-child(2) { background: #E9A23B; }
+.dots i:nth-child(3) { background: #2350E8; }
+.back { text-decoration: none; font-weight: 800; font-size: 15px; color: var(--muted); }
+.back:hover { color: var(--fg); }
+h1 { margin: 40px 0 0; font-weight: 1000; font-size: clamp(40px, 7vw, 60px); line-height: 1; letter-spacing: -1.2px; }
+.lede { margin: 10px 0 0; color: var(--muted); font-weight: 800; font-size: 15px; }
+.card { margin-top: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 26px; padding: clamp(22px, 5vw, 40px); }
+.addr { margin: 0; font-size: 21px; font-weight: 800; line-height: 1.5; }
+h2 { margin: 30px 0 6px; font-weight: 1000; font-size: 18px; }
+p { margin: 6px 0; max-width: 64ch; }
+.muted { color: var(--muted); font-weight: 700; }
+.mail { color: var(--accent); font-weight: 900; text-decoration: none; word-break: break-all; }
+.mail:hover { text-decoration: underline; }
+footer { margin-top: 56px; border-top: 1px solid var(--line); padding-block: 24px calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-weight: 700; font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--fg); text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="./"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>Apps by Deniz</a>
+    <a class="back" href="./">← All apps</a>
+  </header>
+
+  <main>
+    <h1>Imprint</h1>
+    <p class="lede">Impressum · Information according to § 5 DDG</p>
+
+    <div class="card">
+      <p class="addr">Deniz Ilkaya<br>Büschingstraße 11<br>10249 Berlin<br>Germany</p>
+
+      <h2>Contact</h2>
+      <p>E-mail: <a class="mail" href="mailto:appsbydeniz@gmail.com">appsbydeniz@gmail.com</a></p>
+
+      <h2>Responsible for content</h2>
+      <p class="muted">Deniz Ilkaya, address as above (§ 18 (2) MStV).</p>
+
+      <h2>Consumer dispute resolution</h2>
+      <p class="muted">I am neither willing nor obliged to take part in dispute resolution proceedings before a consumer arbitration board. If something is wrong, just send me an e-mail.</p>
+
+      <h2>Liability for links</h2>
+      <p class="muted">This website links to external websites such as the App Store and Google Play. I have no influence on their content, and their operators are responsible for it. If I learn that a linked page breaks the law, I will remove the link.</p>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2025–2026 Deniz Ilkaya</span>
+    <a href="./">Apps by Deniz</a>
+  </div>
+</footer>
+</body>
+</html>

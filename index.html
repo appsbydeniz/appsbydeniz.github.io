@@ -1,128 +1,244 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Apps by Deniz</title>
-  <style>
-    :root { color-scheme: light dark; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apps by Deniz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Small, friendly apps for iPhone by Deniz Ilkaya: Vocaguin, StepTeddy and PATHPOP.">
+<meta property="og:title" content="Apps by Deniz">
+<meta property="og:description" content="Small, friendly apps for iPhone: Vocaguin, StepTeddy and PATHPOP.">
+<link rel="icon" type="image/png" href="assets/icons/pathpop.png">
+<style>
+/* Layout: a short intro with the three mascots as stickers, then one wide card per app,
+   each painted in that app's own colours, then a big contact line. */
+@font-face { font-family: "Nunito"; src: url("pathpop/fonts/Nunito-Variable.ttf") format("truetype"); font-weight: 200 1000; font-display: swap; }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      line-height: 1.6;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
+:root {
+  --bg: #F4F6FB;
+  --fg: #151A2E;
+  --muted: #5A6178;
+  --line: #DFE3EE;
+  --surface: #FFFFFF;
+  --accent: #2350E8;
+  --font: "Nunito", ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* app worlds (same in both themes: they are the apps' own colours) */
+  --voc-a: #1C7FD6; --voc-b: #16BFC0; --voc-ink: #FFFFFF;
+  --ted-a: #FFF1D6; --ted-b: #FBD9A0; --ted-ink: #4A2A10;
+  --pp-a: #8ED1FC; --pp-b: #6FC0F7; --pp-ink: #0D3763;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #10131F; --fg: #EEF1FA; --muted: #A3AAC2; --line: #262C42; --surface: #181C2C; --accent: #7EA0FF; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #10131F; --fg: #EEF1FA; --muted: #A3AAC2; --line: #262C42; --surface: #181C2C; --accent: #7EA0FF; color-scheme: dark; }
 
-    main {
-      max-width: 720px;
-      padding: 40px 22px;
-      text-align: center;
-    }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font); font-weight: 600; font-size: 17px; line-height: 1.55; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
 
-    h1 {
-      font-size: 2.1rem;
-      margin-bottom: 12px;
-    }
+/* ---------- header ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 1000; font-size: 20px; letter-spacing: -.2px; }
+.dots { display: inline-grid; grid-template-columns: repeat(3, 9px); gap: 3px; }
+.dots i { width: 9px; height: 9px; border-radius: 3px; }
+.dots i:nth-child(1) { background: var(--voc-a); }
+.dots i:nth-child(2) { background: #E9A23B; }
+.dots i:nth-child(3) { background: #2350E8; }
+.top nav { display: flex; gap: 6px; }
+.top nav a { text-decoration: none; font-weight: 800; font-size: 15px; padding: 7px 12px; border-radius: 999px; color: var(--muted); }
+.top nav a:hover { color: var(--fg); background: var(--surface); }
 
-    p {
-      margin: 10px 0;
-      font-size: 1.05rem;
-    }
+/* ---------- intro ---------- */
+.intro { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: center; padding-block: 40px 64px; }
+.intro h1 { margin: 0; font-weight: 1000; font-size: clamp(42px, 7vw, 76px); line-height: .98; letter-spacing: -1.5px; text-wrap: balance; }
+.intro h1 em { font-style: normal; color: var(--accent); }
+.intro p { margin: 20px 0 0; max-width: 46ch; font-size: 19px; color: var(--muted); font-weight: 700; }
+.intro .hello { margin: 0 0 14px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 800; font-size: 14px; color: var(--muted); }
+.intro .hello b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #FFFFFF; font-size: 13px; }
 
-    .apps {
-      margin-top: 32px;
-      text-align: left;
-    }
+.stickers { position: relative; height: 340px; min-width: 0; }
+.sticker { position: absolute; width: 168px; height: 168px; border-radius: 38px; overflow: hidden; border: 6px solid #FFFFFF; box-shadow: 0 18px 40px rgba(21,26,46,0.18), 0 2px 0 rgba(21,26,46,0.06); transition: transform .25s cubic-bezier(.3,1.6,.5,1); text-decoration: none; }
+.sticker img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sticker:nth-child(1) { left: 2%; top: 22px; transform: rotate(-9deg); }
+.sticker:nth-child(2) { left: 34%; top: 130px; transform: rotate(6deg); z-index: 2; }
+.sticker:nth-child(3) { right: 0; top: 0; transform: rotate(12deg); }
+.sticker:hover, .sticker:focus-visible { transform: rotate(0deg) scale(1.06) translateY(-6px); z-index: 3; }
 
-    .apps h2 {
-      font-size: 1.3rem;
-      margin-bottom: 12px;
-    }
+/* ---------- apps ---------- */
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 28px; }
+.section-head h2 { margin: 0; font-weight: 1000; font-size: 28px; letter-spacing: -.4px; }
+.section-head span { color: var(--muted); font-weight: 800; font-size: 15px; }
+.apps { display: grid; gap: 22px; margin-top: 24px; }
+.app { position: relative; overflow: hidden; display: grid; grid-template-columns: 148px minmax(0, 1fr) auto; gap: 28px; align-items: center; padding: 28px 32px; border-radius: 32px; color: var(--ink); background: linear-gradient(120deg, var(--a), var(--b)); }
+.app > * { position: relative; z-index: 1; }
+.app.voc { --a: var(--voc-a); --b: var(--voc-b); --ink: var(--voc-ink); --chip: rgba(255,255,255,0.2); --btn: #FFFFFF; --btn-ink: #0E4F8A; }
+.app.ted { --a: var(--ted-a); --b: var(--ted-b); --ink: var(--ted-ink); --chip: rgba(74,42,16,0.1); --btn: #4A2A10; --btn-ink: #FFF1D6; }
+.app.pp  { --a: var(--pp-a); --b: var(--pp-b); --ink: var(--pp-ink); --chip: rgba(255,255,255,0.45); --btn: #FFD43B; --btn-ink: #5A3500; }
+.app .icon { width: 148px; height: 148px; border-radius: 34px; box-shadow: 0 12px 28px rgba(0,0,0,0.18); display: block; }
+.app .body { min-width: 0; }
+.app .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.app .chip { padding: 3px 10px; border-radius: 999px; background: var(--chip); font-weight: 900; font-size: 12px; letter-spacing: .8px; text-transform: uppercase; }
+.app h3 { margin: 0; font-weight: 1000; font-size: clamp(30px, 4vw, 40px); line-height: 1; letter-spacing: -.6px; }
+.app .sub { margin: 6px 0 0; font-weight: 900; font-size: 17px; opacity: .85; }
+.app .desc { margin: 10px 0 0; max-width: 52ch; font-weight: 700; font-size: 16px; opacity: .92; }
+.app .links { display: flex; flex-direction: column; align-items: stretch; gap: 10px; min-width: 190px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 20px; border-radius: 16px; background: var(--btn); color: var(--btn-ink); text-decoration: none; font-weight: 1000; font-size: 16px; box-shadow: 0 4px 0 rgba(0,0,0,0.16); transition: transform .1s ease, box-shadow .1s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.16); }
+.small { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; font-weight: 800; font-size: 14px; }
+.small a { text-decoration: none; opacity: .85; }
+.small a:hover { opacity: 1; text-decoration: underline; }
+/* decorative motif per app, drawn in CSS */
+.app::after { content: ""; position: absolute; pointer-events: none; z-index: 0; }
+.app.voc::after { right: -40px; bottom: -60px; width: 260px; height: 260px; border-radius: 50%; border: 36px solid rgba(255,255,255,0.14); }
+.app.ted::after { right: 220px; top: -50px; width: 160px; height: 160px; border-radius: 50%; background: rgba(233,162,59,0.35); }
+.app.pp::after { right: 210px; bottom: -34px; width: 120px; height: 120px; border-radius: 26px; background: rgba(255,255,255,0.3); transform: rotate(14deg); }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+/* ---------- contact ---------- */
+.contact { margin-top: 80px; padding-block: 56px; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
+.contact h2 { margin: 0; font-weight: 1000; font-size: clamp(32px, 5vw, 52px); line-height: 1; letter-spacing: -1px; text-wrap: balance; }
+.contact p { margin: 12px 0 0; color: var(--muted); font-weight: 700; max-width: 48ch; }
+.mail { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; }
+.mail a { font-weight: 1000; font-size: clamp(19px, 2.6vw, 24px); color: var(--accent); text-decoration: none; word-break: break-all; }
+.mail a:hover { text-decoration: underline; }
+.copy { height: 38px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); font: inherit; font-weight: 800; font-size: 14px; cursor: pointer; }
 
-    li {
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(127,127,127,0.25);
-    }
+footer { border-top: 1px solid var(--line); padding-block: 24px calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-weight: 700; font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
+footer nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--fg); text-decoration: underline; }
 
-    .app-name {
-      font-weight: 600;
-      font-size: 1.05rem;
-    }
-
-    .app-link {
-      display: inline-block;
-      margin-top: 6px;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: underline;
-    }
-
-    .contact {
-      margin-top: 36px;
-      font-weight: 600;
-    }
-
-    .footer {
-      margin-top: 48px;
-      font-size: 0.95rem;
-      opacity: 0.7;
-    }
-  </style>
+/* ---------- responsive ---------- */
+@media (max-width: 880px) {
+  .intro { grid-template-columns: minmax(0, 1fr); padding-block: 16px 40px; gap: 8px; }
+  .stickers { height: 250px; max-width: 420px; width: 100%; justify-self: center; }
+  .sticker { width: 128px; height: 128px; border-radius: 30px; border-width: 5px; }
+  .sticker:nth-child(2) { top: 100px; }
+  .app { grid-template-columns: 108px minmax(0, 1fr); padding: 24px; gap: 20px; }
+  .app .icon { width: 108px; height: 108px; border-radius: 26px; }
+  .app .links { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; min-width: 0; }
+  .app .links .btn { flex: 1 1 200px; }
+  .small { justify-content: flex-start; }
+  .contact { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .app .icon { width: 88px; height: 88px; border-radius: 22px; }
+  .top nav a.opt { display: none; }
+  .sticker { width: 112px; height: 112px; }
+  .stickers { height: 220px; }
+  .sticker:nth-child(2) { left: 30%; top: 92px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
 </head>
 <body>
-  <main>
-    <h1>Welcome 👋</h1>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="./"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>Apps by Deniz</a>
+    <nav aria-label="Main">
+      <a class="opt" href="#apps">Apps</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <p>
-        Welcome to Apps by Deniz.
-    </p>
-
-    <p>
-        This page lists my mobile apps and provides a direct way to contact me for support or questions.
-    </p>
-
-    <div class="apps">
-      <h2>List of Apps</h2>
-      <ul>
-        <li>
-          <div class="app-name">Vocaguin</div>
-          <div class="app-link">
-            <a href="https://apps.apple.com/app/id6754769268" target="_blank" rel="noopener noreferrer">
-              View on the App Store
-            </a>
-          </div>
-        </li>
-        <li>
-          <div class="app-name">PATHPOP – Remember the Path</div>
-          <div class="app-link">
-            <a href="pathpop/">Website, privacy policy and imprint</a>
-          </div>
-        </li>
-      </ul>
+  <section class="intro">
+    <div>
+      <p class="hello"><b>D</b>Indie developer from Germany</p>
+      <h1>Small apps with <em>big characters.</em></h1>
+      <p>A penguin that helps you learn words, a bear that walks with you, and a comet that trains your memory. Each app does one thing and tries to make it fun.</p>
     </div>
+    <div class="stickers" aria-label="App icons">
+      <a class="sticker" href="#vocaguin" aria-label="Vocaguin"><img src="assets/icons/vocaguin.jpg" alt="" width="256" height="256"></a>
+      <a class="sticker" href="#pathpop" aria-label="PATHPOP"><img src="assets/icons/pathpop.png" alt="" width="256" height="256"></a>
+      <a class="sticker" href="#stepteddy" aria-label="StepTeddy"><img src="assets/icons/stepteddy.jpg" alt="" width="256" height="256"></a>
+    </div>
+  </section>
 
-    <p class="contact">
-      If you have any questions regarding the apps listed above,<br />
-      please contact me at:
-      <br />
-      <a href="mailto:appsbydeniz@gmail.com">appsbydeniz@gmail.com</a>
-    </p>
+  <main id="apps">
+    <div class="section-head">
+      <h2>The apps</h2>
+      <span>3 apps · iPhone first</span>
+    </div>
+    <div class="apps">
+      <article class="app voc" id="vocaguin">
+        <img class="icon" src="assets/icons/vocaguin.jpg" alt="Vocaguin app icon" width="256" height="256">
+        <div class="body">
+          <div class="meta"><span class="chip">Education</span><span class="chip">iPhone · iPad</span></div>
+          <h3>Vocaguin</h3>
+          <p class="sub">Flashcards for languages</p>
+          <p class="desc">Build your own vocabulary lists in seconds and learn them with quick quiz modes. Made for school, university and self-study.</p>
+        </div>
+        <div class="links">
+          <a class="btn" href="https://apps.apple.com/app/id6754769268" target="_blank" rel="noopener noreferrer">Get it on the App Store</a>
+          <div class="small"><a href="privacy-vocaguin.html">Privacy</a><a href="terms-vocaguin.html">Terms</a></div>
+        </div>
+      </article>
 
-    <div class="footer">
-      © 2025–2026 Deniz Ilkaya
+      <article class="app ted" id="stepteddy">
+        <img class="icon" src="assets/icons/stepteddy.jpg" alt="StepTeddy app icon" width="256" height="256">
+        <div class="body">
+          <div class="meta"><span class="chip">Health &amp; Fitness</span><span class="chip">iPhone</span></div>
+          <h3>StepTeddy</h3>
+          <p class="sub">Happy bear, happy you</p>
+          <p class="desc">Teddy cheers you on with every step. Reach your daily goal, keep your streak alive and collect badges from your first 1,000 steps on.</p>
+        </div>
+        <div class="links">
+          <a class="btn" href="https://apps.apple.com/app/id6761550152" target="_blank" rel="noopener noreferrer">Get it on the App Store</a>
+          <div class="small"><a href="stepteddy/">Website</a><a href="stepteddy/privacy.html">Privacy</a><a href="stepteddy/terms.html">Terms</a></div>
+        </div>
+      </article>
+
+      <article class="app pp" id="pathpop">
+        <img class="icon" src="assets/icons/pathpop.png" alt="PATHPOP app icon" width="256" height="256">
+        <div class="body">
+          <div class="meta"><span class="chip">Puzzle</span><span class="chip">Coming soon</span></div>
+          <h3>PATHPOP</h3>
+          <p class="sub">Remember the path</p>
+          <p class="desc">A path lights up, you tap it back. Every level it gets a little longer. One wrong tile and you start again.</p>
+        </div>
+        <div class="links">
+          <a class="btn" href="pathpop/">Try the demo</a>
+          <div class="small"><a href="pathpop/">Website</a><a href="pathpop/privacy.html">Privacy</a></div>
+        </div>
+      </article>
     </div>
   </main>
+
+  <section class="contact" id="contact">
+    <div>
+      <h2>Questions, bugs or ideas?</h2>
+      <p>Write me an e-mail. Support for all apps goes to the same address.</p>
+    </div>
+    <div class="mail">
+      <a href="mailto:appsbydeniz@gmail.com" id="mailLink">appsbydeniz@gmail.com</a>
+      <button class="copy" id="copy" type="button">Copy</button>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2025–2026 Deniz Ilkaya</span>
+    <nav aria-label="Legal">
+      <a href="imprint.html">Imprint</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+document.getElementById("copy").addEventListener("click", function () {
+  var btn = this, mail = "appsbydeniz@gmail.com";
+  function done() { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); }
+  function selectMail() { var r = document.createRange(); r.selectNodeContents(document.getElementById("mailLink")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(mail).then(done, selectMail);
+  else selectMail();
+});
+</script>
 </body>
 </html>
-
